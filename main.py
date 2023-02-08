@@ -10,12 +10,16 @@ class Coding:
         return (self.__ALPHABET.index(i) + self.__KEY) % len(self.__ALPHABET)
 
     def caesar_code(self):
-        self.ctext = ''.join([self.__ALPHABET[self.caesar_code_i(i)] for i in self.text])
+        text_code = []
+        for i in self.text:
+            text_code.append(self.__ALPHABET[self.caesar_code_i(i)])
+        self.ctext = ''.join(text_code)
 
     def caesar_decode_i(self, i):
         return (self.__ALPHABET.index(i) - self.__KEY) % len(self.__ALPHABET)
 
     def caesar_decode(self):
-        self.text = ''.join([self.__ALPHABET[self.caesar_decode_i(i)] for i in self.ctext])
-
-
+        text_code = []
+        for i in self.text:
+            text_code.append(self.__ALPHABET[self.caesar_decode_i(i)])
+        self.ctext = ''.join(text_code)

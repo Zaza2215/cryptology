@@ -2,6 +2,9 @@ class Coding:
     __KEY = 18
     __KEY_LINE = 17
     __KEY_LINE_DECODE = None
+    __A = 25
+    __A_DECODE = None
+    __B = 17
     __ALPHABET = 'абвгґдеєжзиіїйклмнопрстуфхцчшщьюя ,._'
 
     def __init__(self, text=None, ctext=None):
@@ -46,3 +49,12 @@ class Coding:
         for i in self.ctext:
             text_code.append(self.line_decode_i(i))
         self.text = ''.join(text_code)
+
+    def afin_code_i(self, i: str) -> str:
+        return self.__ALPHABET[(self.__ALPHABET.index(i) * self.__A + self.__B) % len(self.__ALPHABET)]
+
+    def afin_code(self):
+        text_code = []
+        for i in self.text:
+            text_code.append(self.afin_code_i(i))
+        self.ctext = ''.join(text_code)

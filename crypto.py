@@ -1,4 +1,4 @@
-class Coding:
+class Crypto:
     __KEY = 18
     __KEY_LINE = 17
     __KEY_LINE_DECODE = None

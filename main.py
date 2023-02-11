@@ -11,6 +11,13 @@ class Coding:
         self.text = text
         self.ctext = ctext
 
+    @staticmethod
+    def get_inverse_key(a, m):
+        for i in range(1, m):
+            if ((a % m) * (i % m)) % m == 1:
+                return i
+        return -1
+
     def caesar_code_i(self, i: str) -> str:
         return self.__ALPHABET[(self.__ALPHABET.index(i) + self.__KEY) % len(self.__ALPHABET)]
 
@@ -58,3 +65,17 @@ class Coding:
         for i in self.text:
             text_code.append(self.afin_code_i(i))
         self.ctext = ''.join(text_code)
+
+    def afin_decode_i(self, i: str) -> str:
+        index = self.__A_DECODE * (self.__ALPHABET.index(i) + len(self.__ALPHABET) - self.__B) % len(
+            self.__ALPHABET)
+        return self.__ALPHABET[index]
+
+    def afin_decode(self):
+        text_code = []
+        if not self.__A_DECODE:
+            self.__A_DECODE = self.__class__.get_inverse_key(self.__A, len(self.__ALPHABET))
+
+        for i in self.ctext:
+            text_code.append(self.afin_decode_i(i))
+        self.text = ''.join(text_code)

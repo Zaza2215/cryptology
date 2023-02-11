@@ -38,8 +38,8 @@ class Coding:
             text_code.append(self.line_code_i(i))
         self.ctext = ''.join(text_code)
 
-    def line_decode_i(self, i):
-        return self.__ALPHABET[i * self.__KEY_LINE_DECODE % len(self.__ALPHABET)]
+    def line_decode_i(self, i: str) -> str:
+        return self.__ALPHABET[self.__ALPHABET.index(i) * self.__KEY_LINE_DECODE % len(self.__ALPHABET)]
 
     def line_decode(self):
         text_code = []

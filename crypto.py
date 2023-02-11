@@ -5,7 +5,7 @@ class Crypto:
     __A = 25
     __A_DECODE = None
     __B = 17
-    __ALPHABET = 'абвгґдеєжзиіїйклмнопрстуфхцчшщьюя ,._'
+    __ALPHABET = 'abcdefghijklmnopqrstuvwxyz1234567890 ,.?_'
 
     def __init__(self, text=None, ctext=None):
         self.text = text
@@ -18,8 +18,12 @@ class Crypto:
                 return i
         return -1
 
+    @property
+    def alphabet(self):
+        return self.__ALPHABET
+
     def caesar_code_i(self, i: str) -> str:
-        return self.__ALPHABET[(self.__ALPHABET.index(i) + self.__KEY) % len(self.__ALPHABET)]
+        return self.alphabet[(self.alphabet.index(i) + self.__KEY) % len(self.alphabet)]
 
     def caesar_code(self):
         text_code = []
@@ -28,7 +32,7 @@ class Crypto:
         self.ctext = ''.join(text_code)
 
     def caesar_decode_i(self, i: str) -> str:
-        return self.__ALPHABET[(self.__ALPHABET.index(i) - self.__KEY) % len(self.__ALPHABET)]
+        return self.alphabet[(self.alphabet.index(i) - self.__KEY) % len(self.alphabet)]
 
     def caesar_decode(self):
         text_code = []
@@ -37,7 +41,7 @@ class Crypto:
         self.text = ''.join(text_code)
 
     def line_code_i(self, i: str) -> str:
-        return self.__ALPHABET[(self.__ALPHABET.index(i) * self.__KEY_LINE) % len(self.__ALPHABET)]
+        return self.alphabet[(self.alphabet.index(i) * self.__KEY_LINE) % len(self.alphabet)]
 
     def line_code(self):
         text_code = []
@@ -46,19 +50,19 @@ class Crypto:
         self.ctext = ''.join(text_code)
 
     def line_decode_i(self, i: str) -> str:
-        return self.__ALPHABET[self.__ALPHABET.index(i) * self.__KEY_LINE_DECODE % len(self.__ALPHABET)]
+        return self.__ALPHABET[self.alphabet.index(i) * self.__KEY_LINE_DECODE % len(self.alphabet)]
 
     def line_decode(self):
         text_code = []
         if not self.__KEY_LINE_DECODE:
-            self.__KEY_LINE_DECODE = self.__KEY_LINE ** (len(self.__ALPHABET) - 2) % len(self.__ALPHABET)
+            self.__KEY_LINE_DECODE = self.__KEY_LINE ** (len(self.alphabet) - 2) % len(self.alphabet)
 
         for i in self.ctext:
             text_code.append(self.line_decode_i(i))
         self.text = ''.join(text_code)
 
     def afin_code_i(self, i: str) -> str:
-        return self.__ALPHABET[(self.__ALPHABET.index(i) * self.__A + self.__B) % len(self.__ALPHABET)]
+        return self.alphabet[(self.alphabet.index(i) * self.__A + self.__B) % len(self.alphabet)]
 
     def afin_code(self):
         text_code = []

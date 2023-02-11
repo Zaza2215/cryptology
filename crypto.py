@@ -10,6 +10,8 @@ class Crypto:
     def __init__(self, text=None, ctext=None):
         self.text = text
         self.ctext = ctext
+        self.__KEY_LINE_DECODE = self.__KEY_LINE ** (len(self.alphabet) - 2) % len(self.alphabet)
+        self.__A_DECODE = self.__class__.get_inverse_key(self.__A, len(self.__ALPHABET))
 
     @staticmethod
     def get_inverse_key(a, m):
@@ -43,6 +45,7 @@ class Crypto:
     def line_code_i(self, i: str) -> str:
         return self.alphabet[(self.alphabet.index(i) * self.__KEY_LINE) % len(self.alphabet)]
 
+    # PROBLEM: first sign of alphabet doesn't encrypt
     def line_code(self):
         text_code = []
         for i in self.text:
@@ -54,9 +57,6 @@ class Crypto:
 
     def line_decode(self):
         text_code = []
-        if not self.__KEY_LINE_DECODE:
-            self.__KEY_LINE_DECODE = self.__KEY_LINE ** (len(self.alphabet) - 2) % len(self.alphabet)
-
         for i in self.ctext:
             text_code.append(self.line_decode_i(i))
         self.text = ''.join(text_code)
@@ -77,9 +77,6 @@ class Crypto:
 
     def afin_decode(self):
         text_code = []
-        if not self.__A_DECODE:
-            self.__A_DECODE = self.__class__.get_inverse_key(self.__A, len(self.__ALPHABET))
-
         for i in self.ctext:
             text_code.append(self.afin_decode_i(i))
         self.text = ''.join(text_code)

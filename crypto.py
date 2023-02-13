@@ -1,3 +1,6 @@
+from alphabet import Alphabet
+
+
 class Crypto:
     __KEY = 18
     __KEY_LINE = 17
@@ -5,13 +8,13 @@ class Crypto:
     __A = 25
     __A_DECODE = None
     __B = 17
-    __ALPHABET = 'abcdefghijklmnopqrstuvwxyz1234567890 ,.?_'
+    __ALPHABET = Alphabet('abcdefghijklmnopqrstuvwxyz1234567890 ,.?_')
     __LEN_ALP = len(__ALPHABET)
 
     def __init__(self, text=None, ctext=None):
         self.text = text
         self.ctext = ctext
-        self.__KEY_LINE_DECODE = self.__KEY_LINE ** (len(self.alphabet) - 2) % len(self.alphabet)
+        self.__KEY_LINE_DECODE = self.__KEY_LINE ** (self.__LEN_ALP - 2) % self.__LEN_ALP
         self.__A_DECODE = self.__class__.get_inverse_key(self.__A, len(self.__ALPHABET))
 
     @staticmethod
@@ -37,7 +40,7 @@ class Crypto:
             self.__LEN_ALP = len(value)
 
     def caesar_code_i(self, i: str) -> str:
-        return self.alphabet[(self.alphabet.index(i) + self.__KEY) % len(self.alphabet)]
+        return self.alphabet[(self.alphabet.index(i) + self.__KEY) % self.__LEN_ALP]
 
     def caesar_code(self):
         text_code = []
@@ -46,7 +49,7 @@ class Crypto:
         self.ctext = ''.join(text_code)
 
     def caesar_decode_i(self, i: str) -> str:
-        return self.alphabet[(self.alphabet.index(i) - self.__KEY) % len(self.alphabet)]
+        return self.alphabet[(self.alphabet.index(i) - self.__KEY) % self.__LEN_ALP]
 
     def caesar_decode(self):
         text_code = []
@@ -55,7 +58,7 @@ class Crypto:
         self.text = ''.join(text_code)
 
     def line_code_i(self, i: str) -> str:
-        return self.alphabet[(self.alphabet.index(i) * self.__KEY_LINE) % len(self.alphabet)]
+        return self.alphabet[(self.alphabet.index(i) * self.__KEY_LINE) % self.__LEN_ALP]
 
     # PROBLEM: first sign of alphabet doesn't encrypt
     def line_code(self):
@@ -65,7 +68,7 @@ class Crypto:
         self.ctext = ''.join(text_code)
 
     def line_decode_i(self, i: str) -> str:
-        return self.__ALPHABET[self.alphabet.index(i) * self.__KEY_LINE_DECODE % len(self.alphabet)]
+        return self.__ALPHABET[self.alphabet.index(i) * self.__KEY_LINE_DECODE % self.__LEN_ALP]
 
     def line_decode(self):
         text_code = []
@@ -73,22 +76,22 @@ class Crypto:
             text_code.append(self.line_decode_i(i))
         self.text = ''.join(text_code)
 
-    def afin_code_i(self, i: str) -> str:
-        return self.alphabet[(self.alphabet.index(i) * self.__A + self.__B) % len(self.alphabet)]
+    def affine_code_i(self, i: str) -> str:
+        return self.alphabet[(self.alphabet.index(i) * self.__A + self.__B) % self.__LEN_ALP]
 
-    def afin_code(self):
+    def affine_code(self):
         text_code = []
         for i in self.text:
-            text_code.append(self.afin_code_i(i))
+            text_code.append(self.affine_code_i(i))
         self.ctext = ''.join(text_code)
 
-    def afin_decode_i(self, i: str) -> str:
+    def affine_decode_i(self, i: str) -> str:
         index = self.__A_DECODE * (self.__ALPHABET.index(i) + len(self.__ALPHABET) - self.__B) % len(
             self.__ALPHABET)
         return self.__ALPHABET[index]
 
-    def afin_decode(self):
+    def affine_decode(self):
         text_code = []
         for i in self.ctext:
-            text_code.append(self.afin_decode_i(i))
+            text_code.append(self.affine_decode_i(i))
         self.text = ''.join(text_code)

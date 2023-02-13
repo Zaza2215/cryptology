@@ -54,30 +54,30 @@ class CryptoTest(TestCase):
         t.line_decode()
         self.assertEqual(t.text, 'a_hello?')
 
-    # key_afin_1 = 25
-    # key_afin_2 = 17
-    def test_afin_code_i(self):
+    # key_affine_1 = 25
+    # key_affine_2 = 17
+    def test_affine_code_i(self):
         t = Crypto()
-        self.assertEqual(t.afin_code_i('a'), 'r')
-        self.assertEqual(t.afin_code_i('_'), '8')
-        self.assertEqual(t.afin_code_i('e'), '0')
-        self.assertEqual(t.afin_code_i('7'), '.')
+        self.assertEqual(t.affine_code_i('a'), 'r')
+        self.assertEqual(t.affine_code_i('_'), '8')
+        self.assertEqual(t.affine_code_i('e'), '0')
+        self.assertEqual(t.affine_code_i('7'), '.')
 
-    def test_afin_decode_i(self):
+    def test_affine_decode_i(self):
         t = Crypto()
-        self.assertEqual(t.afin_decode_i('r'), 'a')
-        self.assertEqual(t.afin_decode_i('8'), '_')
-        self.assertEqual(t.afin_decode_i('0'), 'e')
-        self.assertEqual(t.afin_decode_i('.'), '7')
+        self.assertEqual(t.affine_decode_i('r'), 'a')
+        self.assertEqual(t.affine_decode_i('8'), '_')
+        self.assertEqual(t.affine_decode_i('0'), 'e')
+        self.assertEqual(t.affine_decode_i('.'), '7')
 
-    def test_afin_code(self):
+    def test_affine_code(self):
         t = Crypto(text='a_hello?')
-        t.afin_code()
+        t.affine_code()
         self.assertEqual(t.ctext, 'r830ff?i')
 
-    def test_afin_decode(self):
+    def test_affine_decode(self):
         t = Crypto(ctext='r830ff?i')
-        t.afin_decode()
+        t.affine_decode()
         self.assertEqual(t.text, 'a_hello?')
 
     def test_get_invert_key(self):

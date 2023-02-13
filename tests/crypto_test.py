@@ -83,6 +83,25 @@ class CryptoTest(TestCase):
     def test_get_invert_key(self):
         self.assertEqual(Crypto.get_inverse_key(5, 29), 6)
         self.assertEqual(Crypto.get_inverse_key(5, 26), 21)
-        self.assertEqual(Crypto.get_inverse_key(5, 26), 21)
-        self.assertEqual(Crypto.get_inverse_key(5, 26), 21)
 
+    def test_alphabet(self):
+        t = Crypto()
+        with self.assertRaises(ValueError) as ex:
+            value = ['a', 'b', 'c', 'd', 'e']
+            t.alphabet = value
+        self.assertEqual(f'Expected a string but received an {type(value)}', ex.exception.args[0])
+
+        with self.assertRaises(ValueError) as ex:
+            value = 'abcdefghh'
+            t.alphabet = value
+        self.assertEqual('Signs are repeated in alphabet', ex.exception.args[0])
+
+    def test_alphabet_len(self):
+        t = Crypto()
+        self.assertEqual(len(t.alphabet), t._Crypto__LEN_ALP)
+        value = 'abcdefgh'
+        t.alphabet = value
+        self.assertEqual(len(t.alphabet), t._Crypto__LEN_ALP)
+
+    if __name__ == '__main__':
+        main()

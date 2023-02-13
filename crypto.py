@@ -6,6 +6,7 @@ class Crypto:
     __A_DECODE = None
     __B = 17
     __ALPHABET = 'abcdefghijklmnopqrstuvwxyz1234567890 ,.?_'
+    __LEN_ALP = len(__ALPHABET)
 
     def __init__(self, text=None, ctext=None):
         self.text = text
@@ -23,6 +24,17 @@ class Crypto:
     @property
     def alphabet(self):
         return self.__ALPHABET
+
+    @alphabet.setter
+    def alphabet(self, value: str):
+
+        if not isinstance(value, str):
+            raise ValueError(f'Expected a string but received an {type(value)}')
+        if len(set(value)) != len(value):
+            raise ValueError('Signs are repeated in alphabet')
+        else:
+            self.__ALPHABET = value
+            self.__LEN_ALP = len(value)
 
     def caesar_code_i(self, i: str) -> str:
         return self.alphabet[(self.alphabet.index(i) + self.__KEY) % len(self.alphabet)]

@@ -3,6 +3,26 @@ from crypto import Crypto
 
 
 class CryptoTest(TestCase):
+    def test_basic_caesar(self):
+        s = Crypto(text='abcdefghijklmnopqrstuvwxyz1234567890 ,.?_')
+        s.caesar_code()
+        s.text = None
+        s.caesar_decode()
+        self.assertEqual(s.text, 'abcdefghijklmnopqrstuvwxyz1234567890 ,.?_')
+
+    def test_basic_line(self):
+        s = Crypto(text='abcdefghijklmnopqrstuvwxyz1234567890 ,.?_')
+        s.line_code()
+        s.text = None
+        s.line_decode()
+        self.assertEqual(s.text, 'abcdefghijklmnopqrstuvwxyz1234567890 ,.?_')
+
+    def test_basic_affine(self):
+        s = Crypto(text='abcdefghijklmnopqrstuvwxyz1234567890 ,.?_')
+        s.affine_code()
+        s.text = None
+        s.affine_decode()
+        self.assertEqual(s.text, 'abcdefghijklmnopqrstuvwxyz1234567890 ,.?_')
 
     # key_caesar = 18
     def test_caesar_code_i(self):

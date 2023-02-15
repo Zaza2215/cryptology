@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectTasksOptions">
+    <TaskOptions isEnabled="true">
+      <option name="arguments" value="$FilePath$" />
+      <option name="checkSyntaxErrors" value="true" />
+      <option name="description" />
+      <option name="exitCodeBehavior" value="ERROR" />
+      <option name="fileExtension" value="py" />
+      <option name="immediateSync" value="true" />
+      <option name="name" value="black formatter" />
+      <option name="output" value="$FilePath$" />
+      <option name="outputFilters">
+        <array />
+      </option>
+      <option name="outputFromStdout" value="false" />
+      <option name="program" value="$PyInterpreterDirectory$/black" />
+      <option name="runOnExternalChanges" value="true" />
+      <option name="scopeName" value="Project Files" />
+      <option name="trackOnlyRoot" value="false" />
+      <option name="workingDir" value="$ProjectFileDir$" />
+      <envs />
+    </TaskOptions>
+    <TaskOptions isEnabled="true">
+      <option name="arguments" value="$FilePath$" />
+      <option name="checkSyntaxErrors" value="true" />
+      <option name="description" />
+      <option name="exitCodeBehavior" value="ERROR" />
+      <option name="fileExtension" value="py" />
+      <option name="immediateSync" value="true" />
+      <option name="name" value="isort formatter" />
+      <option name="output" value="$FilePath$" />
+      <option name="outputFilters">
+        <array />
+      </option>
+      <option name="outputFromStdout" value="false" />
+      <option name="program" value="$PyInterpreterDirectory$/isort" />
+      <option name="runOnExternalChanges" value="true" />
+      <option name="scopeName" value="Project Files" />
+      <option name="trackOnlyRoot" value="false" />
+      <option name="workingDir" value="$ProjectFileDir$" />
+      <envs />
+    </TaskOptions>
+    <TaskOptions isEnabled="true">
+      <option name="arguments" value="$FilePath$ --in-place" />
+      <option name="checkSyntaxErrors" value="true" />
+      <option name="description" />
+      <option name="exitCodeBehavior" value="ERROR" />
+      <option name="fileExtension" value="py" />
+      <option name="immediateSync" value="true" />
+      <option name="name" value="docformatter formatter" />
+      <option name="output" value="$FilePath$" />
+      <option name="outputFilters">
+        <array />
+      </option>
+      <option name="outputFromStdout" value="false" />
+      <option name="program" value="$PyInterpreterDirectory$/docformatter" />
+      <option name="runOnExternalChanges" value="true" />
+      <option name="scopeName" value="Project Files" />
+      <option name="trackOnlyRoot" value="false" />
+      <option name="workingDir" value="$ProjectFileDir$" />
+      <envs />
+    </TaskOptions>
+    <TaskOptions isEnabled="true">
+      <option name="arguments" value="$FilePath$ --in-place --remove-unused-variables --remove-all-unused-imports" />
+      <option name="checkSyntaxErrors" value="true" />
+      <option name="description" />
+      <option name="exitCodeBehavior" value="ERROR" />
+      <option name="fileExtension" value="py" />
+      <option name="immediateSync" value="true" />
+      <option name="name" value="autoflake formatter" />
+      <option name="output" value="$FilePath$" />
+      <option name="outputFilters">
+        <array />
+      </option>
+      <option name="outputFromStdout" value="false" />
+      <option name="program" value="$PyInterpreterDirectory$/autoflake" />
+      <option name="runOnExternalChanges" value="true" />
+      <option name="scopeName" value="Project Files" />
+      <option name="trackOnlyRoot" value="false" />
+      <option name="workingDir" value="$ProjectFileDir$" />
+      <envs />
+    </TaskOptions>
+    <TaskOptions isEnabled="true">
+      <option name="arguments" value="$FilePath$" />
+      <option name="checkSyntaxErrors" value="true" />
+      <option name="description" />
+      <option name="exitCodeBehavior" value="ERROR" />
+      <option name="fileExtension" value="py" />
+      <option name="immediateSync" value="true" />
+      <option name="name" value="pyupgrade formatter" />
+      <option name="output" value="$FilePath$" />
+      <option name="outputFilters">
+        <array />
+      </option>
+      <option name="outputFromStdout" value="false" />
+      <option name="program" value="$PyInterpreterDirectory$/pyupgrade" />
+      <option name="runOnExternalChanges" value="true" />
+      <option name="scopeName" value="Project Files" />
+      <option name="trackOnlyRoot" value="false" />
+      <option name="workingDir" value="$ProjectFileDir$" />
+      <envs />
+    </TaskOptions>
+    <TaskOptions isEnabled="true">
+      <option name="arguments" value="$FilePath$ --exclude B004" />
+      <option name="checkSyntaxErrors" value="true" />
+      <option name="description" />
+      <option name="exitCodeBehavior" value="ERROR" />
+      <option name="fileExtension" value="py" />
+      <option name="immediateSync" value="true" />
+      <option name="name" value="pybetter formatter" />
+      <option name="output" value="$FilePath$" />
+      <option name="outputFilters">
+        <array />
+      </option>
+      <option name="outputFromStdout" value="false" />
+      <option name="program" value="$PyInterpreterDirectory$/pybetter" />
+      <option name="runOnExternalChanges" value="true" />
+      <option name="scopeName" value="Project Files" />
+      <option name="trackOnlyRoot" value="false" />
+      <option name="workingDir" value="$ProjectFileDir$" />
+      <envs />
+    </TaskOptions>
+    <TaskOptions isEnabled="true">
+      <option name="arguments" value="$FilePath$" />
+      <option name="checkSyntaxErrors" value="true" />
+      <option name="description" />
+      <option name="exitCodeBehavior" value="ERROR" />
+      <option name="fileExtension" value="py" />
+      <option name="immediateSync" value="true" />
+      <option name="name" value="mypy formatter" />
+      <option name="output" value="$FilePath$" />
+      <option name="outputFilters">
+        <array />
+      </option>
+      <option name="outputFromStdout" value="false" />
+      <option name="program" value="$PyInterpreterDirectory$/mypy" />
+      <option name="runOnExternalChanges" value="true" />
+      <option name="scopeName" value="Project Files" />
+      <option name="trackOnlyRoot" value="false" />
+      <option name="workingDir" value="$ProjectFileDir$" />
+      <envs />
+    </TaskOptions>
+    <TaskOptions isEnabled="true">
+      <option name="arguments" value="$FilePath$ --max-line-length 120" />
+      <option name="checkSyntaxErrors" value="true" />
+      <option name="description" />
+      <option name="exitCodeBehavior" value="ERROR" />
+      <option name="fileExtension" value="py" />
+      <option name="immediateSync" value="true" />
+      <option name="name" value="pylint formatter" />
+      <option name="output" value="$FilePath$" />
+      <option name="outputFilters">
+        <array />
+      </option>
+      <option name="outputFromStdout" value="false" />
+      <option name="program" value="$PyInterpreterDirectory$/pylint" />
+      <option name="runOnExternalChanges" value="true" />
+      <option name="scopeName" value="python files" />
+      <option name="trackOnlyRoot" value="false" />
+      <option name="workingDir" value="$ProjectFileDir$" />
+      <envs />
+    </TaskOptions>
+  </component>
+</project>

@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "cryptology"
+version = "0.1.0"
+description = ""
+authors = ["Djon Doe"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+[tool.poetry.group.dev.dependencies]
+black = "*"
+pylint = "*"
+pyupgrade = "*"
+pybetter = "*"
+docformatter = "*"
+autoflake = "*"
+mypy = "*"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

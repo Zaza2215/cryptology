@@ -4,8 +4,8 @@ from collections import UserString
 
 class Alphabet(UserString):
     def __init__(self, seq: object, flag: str = None):
-        """
-        flag 'a' using in affine cipher
+        """Flag 'a' using in affine cipher.
+
         :param seq:
         :param flag:
         """

@@ -1,0 +1,7 @@
+# Generic things
+*~
+*.sqlite3
+.DS_Store
+.coverage
+.env
+

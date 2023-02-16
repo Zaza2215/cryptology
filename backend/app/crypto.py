@@ -47,7 +47,7 @@ class Crypto:
                 else:
                     return result + 1
 
-    _alp = Alphabet('abcdefghijklmnopqrstuvwxyz1234567890 ,.?_')
+    _alp = Alphabet('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 ,.?_')
     _len_alp = len(_alp)
 
     def __init__(self, text: str = ''):

@@ -1,7 +1,7 @@
 from unittest import TestCase, main
 from math import gcd
 
-from crypto import Crypto, Caesar, Line, Affine
+from backend.app.crypto import Crypto, Caesar, Line, Affine
 
 
 class CryptoTest(TestCase):

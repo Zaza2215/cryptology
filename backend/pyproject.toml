@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "сryptography"
+version = "0.1.0"
+description = ""
+authors = ["Zaza <96164075+Zaza2215@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.1.0"
+pylint = "^2.16.2"
+pyupgrade = "^3.3.1"
+pybetter = "^0.4.1"
+docformatter = "^1.5.1"
+mypy = "^1.0.0"
+autoflake = "^2.0.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

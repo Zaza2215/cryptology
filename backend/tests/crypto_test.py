@@ -6,14 +6,14 @@ from backend.app.crypto import Crypto, Caesar, Line, Affine
 
 class CryptoTest(TestCase):
     def test_basic_caesar(self):
-        text = "abcdefghijklmnopqrstuvwxyz1234567890 ,.?_"
+        text = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 ,.?_"
         for key in [-999, -5, -1, 0, 1, 5, 999]:
             s = Caesar(text=text, key=key)
             s.text = s.code()
             self.assertEqual(s.decode(), text)
 
     def test_basic_line(self):
-        text = "abcdefghijklmnopqrstuvwxyz1234567890 ,.?_"
+        text = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 ,.?_"
         for key in [-999, -5, -1, 0, 1, 5, 999]:
             if gcd(key, Line._len_alp) == 1:
                 s = Line(text=text, key=key)
@@ -23,7 +23,7 @@ class CryptoTest(TestCase):
                 self.assertRaises(ValueError)
 
     def test_basic_affine(self):
-        text = "abcdefghijklmnopqrstuvwxyz1234567890 ,.?_"
+        text = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 ,.?_"
         for key_1 in [-999, -5, -1, 0, 1, 5, 999]:
             if gcd(key_1, Affine._len_alp) == 1:
                 for key_2 in [-999, -5, -1, 0, 1, 5, 999]:
@@ -50,33 +50,33 @@ class CryptoTest(TestCase):
 
     def test_caesar_code(self):
         t = Caesar(text="a_hello?", key=18)
-        self.assertEqual(t.code(), "srzw447q")
+        self.assertEqual(t.code(), "srzwDDGq")
 
     def test_caesar_decode(self):
-        t = Caesar(text="srzw447q", key=18)
+        t = Caesar(text="srzwDDGq", key=18)
         self.assertEqual(t.decode(), "a_hello?")
 
     # key_line = 17
     def test_line_code_i(self):
         t = Line("", 17)
-        self.assertEqual(t.code_i("a"), "a")
-        self.assertEqual(t.code_i("_"), "y")
-        self.assertEqual(t.code_i("e"), "2")
-        self.assertEqual(t.code_i("7"), "l")
+        self.assertEqual(t.code_i("a"), "q")
+        self.assertEqual(t.code_i("_"), "_")
+        self.assertEqual(t.code_i("e"), "r")
+        self.assertEqual(t.code_i("7"), ".")
 
     def test_line_decode_i(self):
         t = Line("", 17)
-        self.assertEqual(t.decode_i("a"), "a")
-        self.assertEqual(t.decode_i("y"), "_")
-        self.assertEqual(t.decode_i("2"), "e")
-        self.assertEqual(t.decode_i("l"), "7")
+        self.assertEqual(t.decode_i("q"), "a")
+        self.assertEqual(t.decode_i("_"), "_")
+        self.assertEqual(t.decode_i("r"), "e")
+        self.assertEqual(t.decode_i("."), "7")
 
     def test_line_code(self):
         t = Line(text="a_hello?", key=17)
-        self.assertEqual(t.code(), "ay,2xx8h")
+        self.assertEqual(t.code(), "q_brcc2X")
 
     def test_line_decode(self):
-        t = Line(text="ay,2xx8h", key=17)
+        t = Line(text="q_brcc2X", key=17)
         self.assertEqual(t.decode(), "a_hello?")
 
     # key_affine_1 = 25
@@ -85,22 +85,22 @@ class CryptoTest(TestCase):
         t = Affine("", key_1=25, key_2=17)
         self.assertEqual(t.code_i("a"), "r")
         self.assertEqual(t.code_i("_"), "8")
-        self.assertEqual(t.code_i("e"), "0")
-        self.assertEqual(t.code_i("7"), ".")
+        self.assertEqual(t.code_i("e"), "Y")
+        self.assertEqual(t.code_i("7"), "9")
 
     def test_affine_decode_i(self):
         t = Affine("", key_1=25, key_2=17)
         self.assertEqual(t.decode_i("r"), "a")
         self.assertEqual(t.decode_i("8"), "_")
-        self.assertEqual(t.decode_i("0"), "e")
-        self.assertEqual(t.decode_i("."), "7")
+        self.assertEqual(t.decode_i("Y"), "e")
+        self.assertEqual(t.decode_i("9"), "7")
 
     def test_affine_code(self):
         t = Affine(text="a_hello?", key_1=25, key_2=17)
-        self.assertEqual(t.code(), "r830ff?i")
+        self.assertEqual(t.code(), "r87YyyGI")
 
     def test_affine_decode(self):
-        t = Affine(text="r830ff?i", key_1=25, key_2=17)
+        t = Affine(text="r87YyyGI", key_1=25, key_2=17)
         self.assertEqual(t.decode(), "a_hello?")
 
     def test_get_invert_key(self):

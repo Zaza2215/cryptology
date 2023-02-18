@@ -32,7 +32,7 @@ class Crypto:
             """
             if self.flag is None or isinstance(key, slice):
                 return str(super().__getitem__(key))
-            elif self.flag == "a":
+            elif self.flag == "l":
                 if 0 <= key <= len(self.data):
                     key -= 1
                 return str(super().__getitem__(key))
@@ -41,13 +41,15 @@ class Crypto:
             result = super().index(sub, start, end)
             if self.flag is None:
                 return result
-            elif self.flag == "a":
+            elif self.flag == "l":
                 if result == len(self):
                     return 0
                 else:
                     return result + 1
 
-    _alp = Alphabet("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 ,.?_")
+    _alp = Alphabet(
+        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 ,.?_"
+    )
     _len_alp = len(_alp)
 
     def __init__(self, text: str = ""):
@@ -124,6 +126,11 @@ class Caesar(Crypto):
 
 
 class Line(Crypto):
+    _alp = Crypto.Alphabet(
+        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 ,.?_", flag="l"
+    )
+    _len_alp = len(_alp)
+
     def __init__(self, text: str, key: int):
         super().__init__(text)
         self.key = key
@@ -145,7 +152,6 @@ class Line(Crypto):
     def code_i(self, i: str) -> str:
         return self.alp[(self.alp.index(i) * self.key) % self._len_alp]
 
-    # PROBLEM: first sign of alphabet doesn't encrypt
     def code(self) -> str:
         text_code = []
         for i in self.text:

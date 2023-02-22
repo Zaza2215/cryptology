@@ -134,5 +134,16 @@ class CryptoTest(TestCase):
         t.alp = value
         self.assertEqual(len(t.alp), t._len_alp)
 
+    def test_chage_alp(self):
+        text = 'hello_a'
+        line_t = Line(text, 10)
+        line_t.alp = 'abcdefghijklmnopqrstuvwxyz123456 ,.?_'
+        line_t.text = line_t.code()
+        self.assertEqual(text, line_t.decode())
+        affine_t = Affine(text, 10, 4)
+        affine_t.alp = 'abcdefghijklmnopqrstuvwxyz123456 ,.?_'
+        affine_t.text = affine_t.code()
+        self.assertEqual(text, affine_t.decode())
+
     if __name__ == "__main__":
         main()

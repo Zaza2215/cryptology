@@ -133,7 +133,10 @@ class Line(Crypto):
 
     def __init__(self, text: str, key: int):
         super().__init__(text)
+        self._key_decode = None
         self.key = key
+
+    def set_decode_key(self):
         self._key_decode = self.key ** (self._len_alp - 2) % self._len_alp
 
     @property
@@ -144,10 +147,20 @@ class Line(Crypto):
     def key(self, value):
         if isinstance(value, int) and gcd(value, self._len_alp) == 1:
             self._key = value
+            self.set_decode_key()
         else:
             raise ValueError(
                 "Key must be integer and length of alphabet with key must be coprime"
             )
+
+    @property
+    def alp(self):
+        return self._alp
+
+    @alp.setter
+    def alp(self, value: str):
+        super(Line, Line).alp.__set__(self, value)
+        self.set_decode_key()
 
     def code_i(self, i: str) -> str:
         return self.alp[(self.alp.index(i) * self.key) % self._len_alp]
@@ -171,6 +184,7 @@ class Line(Crypto):
 class Affine(Crypto):
     def __init__(self, text: str, key_1: int, key_2: int):
         super().__init__(text)
+        self._key_decode = None
         self.key_1 = key_1
         self.key_2 = key_2
 
@@ -178,11 +192,14 @@ class Affine(Crypto):
     def key_1(self):
         return self._key_1
 
+    def set_decode_key(self):
+        self._key_decode = self.__class__.get_inverse_key(self.key_1, len(self.alp))
+
     @key_1.setter
     def key_1(self, value):
         if isinstance(value, int) and gcd(value, len(self.alp)) == 1:
             self._key_1 = value
-            self._key_decode = self.__class__.get_inverse_key(self.key_1, len(self.alp))
+            self.set_decode_key()
         else:
             raise ValueError(
                 "Key must be integer and length of alphabet with key must be coprime"
@@ -199,6 +216,15 @@ class Affine(Crypto):
         else:
             raise TypeError("Key must be integer")
 
+    @property
+    def alp(self):
+        return self._alp
+
+    @alp.setter
+    def alp(self, value: str):
+        super(Line, Line).alp.__set__(self, value)
+        self.set_decode_key()
+
     def code_i(self, i: str) -> str:
         return self.alp[(self.alp.index(i) * self.key_1 + self.key_2) % self._len_alp]
 
@@ -210,9 +236,9 @@ class Affine(Crypto):
 
     def decode_i(self, i: str) -> str:
         index = (
-            self._key_decode
-            * (self.alp.index(i) + len(self.alp) - self._key_2)
-            % len(self.alp)
+                self._key_decode
+                * (self.alp.index(i) + len(self.alp) - self._key_2)
+                % len(self.alp)
         )
         return self.alp[index]
 

@@ -85,6 +85,10 @@ class Crypto:
             raise ValueError(f"Expected a string but received an {type(value)}")
         elif len(set(value)) != len(value):
             raise ValueError("Signs are repeated in alphabet")
+        elif self.text not in value:
+            raise ValueError(
+                f"All signs of text must be into the new alphabet: {value}\nClear text or set another alphabet"
+            )
         else:
             self._alp = value
             self._len_alp = len(value)
@@ -159,7 +163,7 @@ class Line(Crypto):
 
     @alp.setter
     def alp(self, value: str):
-        super(Line, Line).alp.__set__(self, value)
+        super(self.__class__, self.__class__).alp.__set__(self, value)
         self.set_decode_key()
 
     def code_i(self, i: str) -> str:
@@ -222,7 +226,7 @@ class Affine(Crypto):
 
     @alp.setter
     def alp(self, value: str):
-        super(Line, Line).alp.__set__(self, value)
+        super(self.__class__, self.__class__).alp.__set__(self, value)
         self.set_decode_key()
 
     def code_i(self, i: str) -> str:
@@ -236,9 +240,9 @@ class Affine(Crypto):
 
     def decode_i(self, i: str) -> str:
         index = (
-                self._key_decode
-                * (self.alp.index(i) + len(self.alp) - self._key_2)
-                % len(self.alp)
+            self._key_decode
+            * (self.alp.index(i) + len(self.alp) - self._key_2)
+            % len(self.alp)
         )
         return self.alp[index]
 
@@ -250,3 +254,18 @@ class Affine(Crypto):
 
 
 __all__ = ["Affine", "Caesar", "Crypto", "Line", "is_prime"]
+
+if __name__ == "__main__":
+    l = Line("Hello", 10)
+    l.alp = "abcdefghijklmnopqrstuvwxyz123456 ,.?_"
+    print(l._len_alp)
+    print(l.code())
+    l.text = l.code()
+    print(l.decode())
+    a = Affine("hello", 10, 4)
+    a.alp = "abcdefghijklmnopqrstuvwxyz123456 ,.?_"
+    print(a._len_alp)
+    print(a.code())
+    a.text = a.code()
+    print(a.decode())
+    # ERROR: When we change the alphabet we didn't validate a text

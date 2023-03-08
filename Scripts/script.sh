@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd ../backend
+cd ../backend/app
 
 # Run black to format code
 echo && echo "Running black..."
@@ -21,7 +21,7 @@ poetry run docformatter -c -r .
 echo && echo "Running mypy..."
 poetry run mypy .
 #
-## Run autoflake to remove unused variables and imports
+# Run autoflake to remove unused variables and imports
 echo && echo "Running autoflake..."
 poetry run autoflake --in-place --remove-unused-variables --remove-all-unused-imports .
 

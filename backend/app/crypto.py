@@ -241,9 +241,9 @@ class Affine(Crypto):
 
     def decode_i(self, i: str) -> str:
         index = (
-            self._key_decode
-            * (self.alp.index(i) + len(self.alp) - self._key_2)
-            % len(self.alp)
+                self._key_decode
+                * (self.alp.index(i) + len(self.alp) - self._key_2)
+                % len(self.alp)
         )
         return self.alp[index]
 
@@ -254,7 +254,13 @@ class Affine(Crypto):
         return "".join(text_code)
 
 
-__all__ = ["Affine", "Caesar", "Crypto", "Line", "is_prime"]
+class PlayFair(Crypto):
+    def __init__(self, text: str, key: str):
+        super().__init__(text)
+        self.key = key
+
+
+__all__ = ["Affine", "Caesar", "Crypto", "Line", "PlayFair", "is_prime"]
 
 if __name__ == "__main__":
     pass

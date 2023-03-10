@@ -1,7 +1,7 @@
 from unittest import TestCase, main
 from math import gcd
 
-from backend.app.crypto import Crypto, Caesar, Line, Affine
+from backend.app.crypto import *
 
 
 class CryptoTest(TestCase):
@@ -153,6 +153,25 @@ class CryptoTest(TestCase):
             line_t.alp = "abcdefghijklmnopqrstuvwxyz123456 ,.?_"
         with self.assertRaises(ValueError) as ex:
             affine_t.alp = "abcdefghijklmnopqrstuvwxyz123456 ,.?_"
+
+    def test_alp_inherited_cls(self):
+        pf = PlayFair("abc", "a")
+        d = {
+            "abcdefghij": "abcdefghij _.,!?",
+            "abcdefghi": "abcdefghi",
+            "abc _,defghi": "abc _,defghi.!?'",
+            "abcdefghijklmnopqrstuvwxyz": "abcdefghijklmnopqrstuvwxyz _.,!?'\"/\\",
+            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 _",
+            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_.": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_.",
+            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_.,": "error",
+        }
+        for key, value in d.items():
+            if value == "error":
+                with self.assertRaises(ValueError) as ex:
+                    pf.alp = key
+            else:
+                pf.alp = key
+                self.assertEqual(value, pf.alp)
 
     if __name__ == "__main__":
         main()

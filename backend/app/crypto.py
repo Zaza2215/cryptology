@@ -91,8 +91,14 @@ class Crypto:
                 f"Necessary characters in the alphabet: {set(self.text) - set(value)}"
             )
         else:
-            self._alp = value
-            self._len_alp = len(value)
+            for cls in self.__class__.mro():
+                if issubclass(cls, Crypto) and cls != Crypto:
+                    if hasattr(cls, "alp"):
+                        break
+                else:
+                    self._alp = value
+                    self._len_alp = len(value)
+                    break
 
 
 class Caesar(Crypto):
@@ -241,9 +247,9 @@ class Affine(Crypto):
 
     def decode_i(self, i: str) -> str:
         index = (
-                self._key_decode
-                * (self.alp.index(i) + len(self.alp) - self._key_2)
-                % len(self.alp)
+            self._key_decode
+            * (self.alp.index(i) + len(self.alp) - self._key_2)
+            % len(self.alp)
         )
         return self.alp[index]
 
@@ -255,9 +261,37 @@ class Affine(Crypto):
 
 
 class PlayFair(Crypto):
+    ADD_NUM = list("0123456789")
+    ADD_CHAR = list(" _.,!?'\"/\=-+<>")
+
     def __init__(self, text: str, key: str):
         super().__init__(text)
         self.key = key
+
+    @property
+    def alp(self):
+        return self._alp
+
+    @alp.setter
+    def alp(self, value):
+        super(self.__class__, self.__class__).alp.fset(self, value)
+        if len(value) ** 0.5 % 1 == 0:
+            self._alp = value
+        else:
+            need_more = int(len(value) ** 0.5 + 1) ** 2 - len(value)
+            add_num = "".join([i for i in self.ADD_NUM if i not in value])
+            add_char = "".join([i for i in self.ADD_CHAR if i not in value])
+            if add_num and need_more > len(add_num):
+                value += add_num
+                need_more -= len(add_num)
+            value += add_char[:need_more]
+            need_more -= len(add_char[:need_more])
+            if not need_more:
+                self._alp = value
+            else:
+                raise ValueError(
+                    "Number of signs in alphabet must be a square of natural number or near."
+                )
 
 
 __all__ = ["Affine", "Caesar", "Crypto", "Line", "PlayFair", "is_prime"]

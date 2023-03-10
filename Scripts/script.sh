@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd ../backend/app
+cd ../backend
 
 # Run black to format code
 echo && echo "Running black..."

@@ -262,7 +262,7 @@ class Affine(Crypto):
 
 class PlayFair(Crypto):
     ADD_NUM = list("0123456789")
-    ADD_CHAR = list(" _.,!?'\"/\=-+<>")
+    ADD_CHAR = list(" _.,!?'\"/\\=-+<>")
 
     def __init__(self, text: str, key: str):
         super().__init__(text)

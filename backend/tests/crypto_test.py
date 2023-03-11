@@ -173,5 +173,13 @@ class CryptoTest(TestCase):
                 pf.alp = key
                 self.assertEqual(value, pf.alp)
 
+    def test_key_playfair(self):
+        pf = PlayFair("abracadabra", "horse")
+        pf.alp = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 ."
+        with self.assertRaises(ValueError):
+            pf.key = "title"
+        with self.assertRaises(ValueError):
+            pf.key = "city!"
+
     if __name__ == "__main__":
         main()

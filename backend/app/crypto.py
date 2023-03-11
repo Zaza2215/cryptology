@@ -267,6 +267,7 @@ class PlayFair(Crypto):
     def __init__(self, text: str, key: str):
         super().__init__(text)
         self.key = key
+        self.alp = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 ."
 
     @property
     def alp(self):
@@ -292,6 +293,21 @@ class PlayFair(Crypto):
                 raise ValueError(
                     "Number of signs in alphabet must be a square of natural number or near."
                 )
+
+    @property
+    def key(self):
+        return self._key
+
+    @key.setter
+    def key(self, value: str):
+        if set(value) - set(self.alp):
+            raise ValueError(
+                "The alphabet doesn't contain the characters that are in the key"
+            )
+        elif len(set(value)) != len(value):
+            raise ValueError("The key must not contain repeated characters")
+        else:
+            self._key = value
 
 
 __all__ = ["Affine", "Caesar", "Crypto", "Line", "PlayFair", "is_prime"]

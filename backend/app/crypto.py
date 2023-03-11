@@ -264,10 +264,30 @@ class PlayFair(Crypto):
     ADD_NUM = list("0123456789")
     ADD_CHAR = list(" _.,!?'\"/\\=-+<>")
 
+    @staticmethod
+    def build_matrix(value: str):
+        n = int(len(value) ** 0.5)
+        matrix = []
+        for i in range(n):
+            matrix.append([])
+            for j in range(n):
+                matrix[i].append(value[i * n + j])
+        return matrix
+
     def __init__(self, text: str, key: str):
         super().__init__(text)
-        self.key = key
+        self.matrix = None
+        self.matrix_decode = None
         self.alp = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 ."
+        self.key = key
+
+    def build_matrix_decode(self):
+        alp_decode = self.alp
+        for char in self.key:
+            if char in alp_decode:
+                alp_decode = alp_decode.replace(char, "")
+        alp_decode = self.key + alp_decode
+        return self.__class__.build_matrix(alp_decode)
 
     @property
     def alp(self):

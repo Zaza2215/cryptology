@@ -181,5 +181,19 @@ class CryptoTest(TestCase):
         with self.assertRaises(ValueError):
             pf.key = "city!"
 
+    def test_matrices(self):
+        pf = PlayFair("text123", "key")
+        pf.alp = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 ."
+        pf.matrix = PlayFair.build_matrix(pf.alp)
+        pf.matrix_decode = PlayFair.build_matrix_decode(pf)
+        self.assertEqual(
+            "".join(["".join(i) for i in pf.matrix]),
+            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 .",
+        )
+        self.assertEqual(
+            "".join(["".join(i) for i in pf.matrix_decode]),
+            "keyabcdfghijlmnopqrstuvwxzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890 .",
+        )
+
     if __name__ == "__main__":
         main()

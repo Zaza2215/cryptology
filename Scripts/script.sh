@@ -26,3 +26,4 @@ echo && echo "Running autoflake..."
 poetry run autoflake --in-place --remove-unused-variables --remove-all-unused-imports .
 
 echo "Refactoring complete!"
+$SHELL
